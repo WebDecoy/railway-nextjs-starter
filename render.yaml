@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: webdecoy-nextjs
+    runtime: node
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    envVars:
+      - key: WEBDECOY_API_KEY
+        sync: false

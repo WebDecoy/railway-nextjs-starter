@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { honeytokenLink } from '@webdecoy/nextjs';
 
 export const metadata = {
-  title: 'Next.js on Railway with WebDecoy',
+  title: 'Next.js with WebDecoy',
 };
 
 export default async function RootLayout({ children }: { children: ReactNode }) {

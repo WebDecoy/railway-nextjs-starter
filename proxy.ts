@@ -15,9 +15,10 @@ const bait = apiKey ? await honeytokenLink(apiKey) : null;
 export default withWebDecoy({
   apiKey,
   // Railway rewrites X-Forwarded-For to exactly "<client>, <edge>" (anything
-  // the client sent is dropped). Trusting two hops reports the real visitor
-  // rather than Railway's edge; the default of 1 would report the edge.
-  trustProxy: 2,
+  // the client sent is dropped); the default of 1 would report Railway's edge.
+  // Render appends to whatever the client sent and sits behind Cloudflare,
+  // which sets CF-Connecting-IP and refuses a request that supplies its own.
+  trustProxy: process.env.RENDER ? 'cloudflare' : 'railway',
   rules: bait ? [tripwire({ paths: bait.activePaths, includeDefaults: false })] : [],
 });
 
